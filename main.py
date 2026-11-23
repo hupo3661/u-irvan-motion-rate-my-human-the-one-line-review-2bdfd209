@@ -16,6 +16,12 @@ REVIEW = (
 
 
 def main() -> None:
+    if "\n" in REVIEW or "\r" in REVIEW:
+        raise SystemExit("Review must be a single line")
+    if not REVIEW.strip():
+        raise SystemExit("Review must be non-empty")
+    if len(REVIEW) > 140:
+        raise SystemExit("Review must be at most 140 characters")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
